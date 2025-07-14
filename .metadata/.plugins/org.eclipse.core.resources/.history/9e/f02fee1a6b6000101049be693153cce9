@@ -1,0 +1,9 @@
+package com.example.alumni.service;
+
+import com.example.alumni.model.Alumni;
+import java.util.List;
+
+public interface AlumniService {
+    List<Alumni> searchAlumni(String university, String designation, Integer passoutYear);
+    List<Alumni> getAllAlumni();
+}

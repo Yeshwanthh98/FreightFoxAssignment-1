@@ -1,0 +1,35 @@
+package com.example.alumni.service;
+
+import com.example.alumni.model.Alumni;
+import com.example.alumni.repository.AlumniRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class AlumniServiceImpl extends AlumniService {
+    private final AlumniRepository alumniRepository;
+
+//    public AlumniServiceImpl(AlumniRepository alumniRepository) {
+//        this.alumniRepository = alumniRepository;
+//    }
+
+    public List<Alumni> searchAlumni(String university, String designation, Integer passoutYear) {
+        // Simulate fetching from PhantomBuster API and saving
+        Alumni dummy = new Alumni();
+        dummy.setName("John Doe");
+        dummy.setUniversity(university);
+        dummy.setCurrentRole(designation);
+        dummy.setPassoutYear(passoutYear);
+        dummy.setLocation("New York");
+        dummy.setLinkedinHeadline("Software Engineer");
+
+        alumniRepository.save(dummy);
+
+        return List.of(dummy);
+    }
+
+    public List<Alumni> getAllAlumni() {
+        return alumniRepository.findAll();
+    }
+}

@@ -1,0 +1,26 @@
+package com.example.alumni.service;
+
+import com.example.alumni.entity.Alumni;
+import com.example.alumni.repository.AlumniRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class AlumniService {
+
+    private final AlumniRepository alumniRepository;
+
+    public AlumniService(AlumniRepository alumniRepository) {
+        this.alumniRepository = alumniRepository;
+    }
+
+    public List<Alumni> getAllAlumni() {
+        return alumniRepository.findAll();
+    }
+
+    public Alumni saveAlumni(Alumni alumni) {
+        return alumniRepository.save(alumni);
+    }
+
+}

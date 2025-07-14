@@ -1,0 +1,39 @@
+package com.example.alumni.service;
+
+import com.example.alumni.entity.Alumni;
+import com.example.alumni.repository.AlumniRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class AlumniService {
+
+    private final AlumniRepository alumniRepository;
+
+    public AlumniService(AlumniRepository alumniRepository) {
+        this.alumniRepository = alumniRepository;
+    }
+
+    public List<Alumni> getAllAlumni() {
+        return alumniRepository.findAll();
+    }
+
+    public Alumni saveAlumni(Alumni alumni) {
+        return alumniRepository.save(alumni);
+    }
+    public Alumni updateAlumni(Alumni alumni) {
+        Alumni existingAlumni = alumniRepository.findById(alumni.getId())
+            .orElseThrow(() -> new RuntimeException("Alumni with ID " + alumni.getId() + " not found"));
+
+        existingAlumni.setName(alumni.getName());
+        existingAlumni.setLocation(alumni.getLocation());
+        existingAlumni.setUniversity(alumni.getUniversity());
+        existingAlumni.setPassoutYear(alumni.getPassoutYear());
+        existingAlumni.setCurrentRole(alumni.getCurrentRole());
+        existingAlumni.setLinkedinHeadline(alumni.getLinkedinHeadline());
+
+        return alumniRepository.save(existingAlumni);
+    }
+
+}

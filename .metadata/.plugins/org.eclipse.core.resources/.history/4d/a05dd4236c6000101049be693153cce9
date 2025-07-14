@@ -1,0 +1,12 @@
+package com.example.alumni.repository;
+
+import com.example.alumni.model.Alumni;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AlumniRepository extends JpaRepository<Alumni, Long> {
+
+	void saveAll(List<com.example.alumni.entity.Alumni> fetchedAlumni);
+}

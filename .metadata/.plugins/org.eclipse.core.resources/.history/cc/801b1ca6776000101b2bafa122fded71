@@ -1,0 +1,31 @@
+package com.example.alumni.entity;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Alumni {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String currentRole;
+    private String university;
+    private String location;
+    private String linkedinHeadline;
+    private Integer passoutYear;
+
+    public Alumni() {}
+
+    public Alumni(String name, String currentRole, String university,
+                  String location, String linkedinHeadline, Integer passoutYear) {
+        this.name = name;
+        this.currentRole = currentRole;
+        this.university = university;
+        this.location = location;
+        this.linkedinHeadline = linkedinHeadline;
+        this.passoutYear = passoutYear;
+    }
+
+    // Getters and setters
+}

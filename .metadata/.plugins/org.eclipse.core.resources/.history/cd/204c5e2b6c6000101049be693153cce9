@@ -1,0 +1,35 @@
+package com.example.alumni.service;
+
+import com.example.alumni.dto.AlumniSearchRequest;
+import com.example.alumni.entity.Alumni;
+import com.example.alumni.repository.AlumniRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class AlumniService {
+
+    private final AlumniRepository alumniRepository;
+
+    public AlumniService(AlumniRepository alumniRepository) {
+        this.alumniRepository = alumniRepository;
+    }
+
+    public List<Alumni> searchAndSaveAlumni(AlumniSearchRequest request) {
+        // Mocking fetched data from PhantomBuster
+        List<Alumni> fetchedAlumni = List.of(
+            new Alumni("John Doe", "Software Engineer", "University of XYZ",
+                    "New York, NY", "Passionate Software Engineer at XYZ Corp", 2020),
+            new Alumni("Jane Smith", "Data Scientist", "University of XYZ",
+                    "San Francisco, CA", "Data Scientist | AI Enthusiast", 2019)
+        );
+
+        alumniRepository.saveAll(fetchedAlumni);
+        return fetchedAlumni;
+    }
+
+    public List<com.example.alumni.model.Alumni> getAllAlumni() {
+        return alumniRepository.findAll();
+    }
+}

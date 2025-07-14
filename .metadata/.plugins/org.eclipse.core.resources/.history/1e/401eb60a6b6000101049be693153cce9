@@ -1,0 +1,40 @@
+package com.example.alumni.controller;
+
+import com.example.alumni.model.Alumni;
+import com.example.alumni.service.AlumniService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/alumni")
+public class AlumniController {
+    private final AlumniService alumniService;
+
+    public AlumniController(AlumniService alumniService) {
+        this.alumniService = alumniService;
+    }
+
+    @PostMapping("/search")
+    public Map<String, Object> search(@RequestBody Map<String, Object> payload) {
+        String university = (String) payload.get("university");
+        String designation = (String) payload.get("designation");
+        Integer passoutYear = payload.get("passoutYear") != null ? (Integer) payload.get("passoutYear") : null;
+
+        List<Alumni> data = alumniService.searchAlumni(university, designation, passoutYear);
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("data", data);
+        return response;
+    }
+
+    @GetMapping("/all")
+    public Map<String, Object> getAll() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("data", alumniService.getAllAlumni());
+        return response;
+    }
+}
